@@ -19,11 +19,6 @@ router.put("/:id", (req, res) => {
     name: req.body.name,
   };
 
-  if (req.body.name == "" || req.body.name.length < 3) {
-    res.send("Type is required and it has to be 3 character long!");
-    return;
-  }
-
   genres.update({ _id: req.params.id }, updatedGenre, (err, success) => {
     if (err) res.status(404).send(err.message);
     else res.redirect("/");

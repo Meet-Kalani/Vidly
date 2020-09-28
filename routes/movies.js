@@ -1,34 +1,35 @@
 const mongoose = require("mongoose");
-const customers = require("../models/customers");
+const movies = require("../models/movies");
 const express = require("express");
 let router = express.Router();
 
 router.get("/:id", (req, res) => {
-  customers.findById({ _id: req.params.id }, (err, foundCustomer) => {
+  movies.findById({ _id: req.params.id }, (err, foundMovies) => {
     if (err) {
       res.status(404).send(err.message);
     } else {
-      res.render("index", { genres: foundCustomer });
-      console.log(foundCustomer);
+      res.render("index", { movies: foundMovies });
+      console.log(foundMovies);
     }
   });
 });
 
 router.put("/:id", (req, res) => {
-  let updatedCustomer = {
-      name: req.body.name,
-      phone: req.body.phone,
-      isGold: req.body.isGold
+  let updatedMovie = {
+      title: req.body.title,
+      numberInStock: req.body.numberInStock,
+      dailyrentalRate: req.body.dailyrentalRate,
+      genre: req.body.genre
   };
 
-  customers.update({ _id: req.params.id }, updatedCustomer, (err, success) => {
+  movies.update({ _id: req.params.id }, updatedMovie, (err, success) => {
     if (err) res.status(404).send(err.message);
     else res.redirect("/");
   });
 });
 
 router.delete("/:id", (req, res) => {
-  customers.deleteOne({ _id: req.params.id }, (err, success) => {
+  movies.deleteOne({ _id: req.params.id }, (err, success) => {
     if (err) res.status(404).send(err.message);
     else res.redirect("/");
   });
