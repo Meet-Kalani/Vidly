@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const genres = require("../models/genres");
+const {genres} = require("../models/genres");
 const express = require("express");
 let router = express.Router();
 
@@ -19,7 +19,7 @@ router.put("/:id", (req, res) => {
     name: req.body.name,
   };
 
-  genres.update({ _id: req.params.id }, updatedGenre, (err, success) => {
+  genres.findOneAndUpdate({ _id: req.params.id }, updatedGenre, (err, success) => {
     if (err) res.status(404).send(err.message);
     else res.redirect("/");
   });

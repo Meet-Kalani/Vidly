@@ -8,6 +8,7 @@ const rentals = require("./models/rentals");
 const genres_routes = require("./routes/genres");
 const customers_routes = require("./routes/customers");
 const movies_routes = require("./routes/movies");
+const rentals_routes = require("./routes/rentals");
 const port = process.env.PORT || 5000;
 
 mongoose
@@ -24,6 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/genres", genres_routes);
 app.use("/api/customers", customers_routes);
 app.use("/api/movies", movies_routes);
+app.use("/api/rentals", rentals_routes);
 
 app.get("/", (req, res) => {
   genres.find({}, (err, foundGenres) => {
@@ -36,11 +38,6 @@ app.post("/", (req, res) => {
   let newGenre = {
     name: req.body.name,
   };
-
-  if (req.body.name == "") {
-    res.status(403).send("Type is required and it has to be 3 character long!");
-    return;
-  }
 
   genres.create(newGenre, (err, success) => {
     if (err) res.status(404).send(err.message);
