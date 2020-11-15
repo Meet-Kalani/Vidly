@@ -4,13 +4,22 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "jest": "jest --env=node --colors --coverage test",
+    "test": "npm run jest"
   },
   "author": "Meet Kalani",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.0",
+    "config": "^3.3.2",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
-    "mongoose": "^5.10.5"
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.5",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "jest": "^22.2.2",
+    "supertest": "^3.0.0"
   }
 }
